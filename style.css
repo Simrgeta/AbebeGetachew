@@ -1,0 +1,133 @@
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    background: #0f0f1a;
+    color: #eee;
+    overflow-x: hidden;
+    transition: background 0.5s, color 0.5s;
+}
+
+/* Light Theme */
+body.light {
+    background: #f9f9f9;
+    color: #111;
+}
+
+/* Particle Canvas */
+#particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    position: fixed;
+    width: 100%;
+    backdrop-filter: blur(12px);
+    background: rgba(0,0,0,0.3);
+    z-index: 1000;
+}
+
+body.light header {
+    background: rgba(255,255,255,0.3);
+}
+
+header .logo {
+    font-weight: bold;
+    font-size: 1.5rem;
+    background: linear-gradient(45deg,#ff6ec7,#1ee7ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+header nav a, header nav button {
+    margin-left: 1rem;
+    text-decoration: none;
+    color: inherit;
+    font-weight: 500;
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-size: 1rem;
+}
+
+/* Glass Card */
+.glass-card {
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(12px);
+    border-radius: 1rem;
+    padding: 2rem;
+    margin: 2rem;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    transition: background 0.5s;
+}
+
+body.light .glass-card {
+    background: rgba(255,255,255,0.25);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+}
+
+/* Hero */
+.hero {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.btn-glow {
+    display: inline-block;
+    padding: 0.8rem 2rem;
+    margin-top: 1rem;
+    border-radius: 2rem;
+    background: linear-gradient(45deg, #ff6ec7, #1ee7ff);
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    box-shadow: 0 0 20px rgba(255,110,199,0.6);
+    transition: 0.3s;
+}
+
+.btn-glow:hover {
+    box-shadow: 0 0 40px rgba(255,110,199,0.8);
+}
+
+/* Features */
+.features {
+    text-align: center;
+    padding: 5rem 1rem;
+}
+
+.feature-cards {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.feature-cards .glass-card {
+    margin: 1rem;
+    flex: 1 1 250px;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 2rem;
+    margin-top: 2rem;
+    font-size: 0.9rem;
+}
