@@ -1,68 +1,159 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Privacy Policy — Abebe Getachew</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Privacy Policy — ABMS</title>
+  <link rel="stylesheet" href="style.css"> <!-- Reuse main site CSS -->
   <style>
-    body{font-family:Inter,Segoe UI,Arial;line-height:1.6;color:#0b1220;padding:30px;max-width:900px;margin:0 auto}
-    h1,h2{color:#112; margin-bottom:10px}
-    p{color:#223}
-    a{color:#1a73e8}
-    .muted{color:#556}
+    /* Page-specific overrides */
+    main {
+      max-width: 900px;
+      margin: 100px auto 60px;
+      padding: 20px;
+    }
+    .policy-card {
+      padding: 32px;
+      border-radius: 16px;
+      background: var(--card);
+      border: 1px solid rgba(255,255,255,0.06);
+      box-shadow: 0 12px 32px rgba(10,10,20,0.4);
+    }
+    .policy-card h1, .policy-card h2, .policy-card h3 {
+      margin-bottom: 12px;
+      font-weight: 700;
+    }
+    .policy-card h1 { font-size: 2rem; margin-bottom: 20px; }
+    .policy-card h2 { font-size: 1.4rem; margin-top: 28px; }
+    .policy-card p, .policy-card ul, .policy-card ol {
+      margin-bottom: 14px;
+      color: var(--muted);
+    }
+    .policy-card a {
+      color: var(--accent1);
+      text-decoration: none;
+    }
+    .policy-card a:hover { text-decoration: underline; }
+    .muted { font-size: 0.9rem; color: var(--muted); }
   </style>
 </head>
 <body>
-  <h1>Privacy Policy — Abebe Getachew</h1>
-  <p class="muted">Last updated: 2025-08-26</p>
+  <!-- Site Header -->
+  <header class="site-header" role="banner">
+    <div class="container header-inner">
+      <a class="logo" href="/">ABMS</a>
+      <nav class="site-nav" role="navigation" aria-label="Main navigation">
+        <a href="/">Home</a>
+        <a href="/privacy" aria-current="page">Privacy Policy</a>
+        <button id="themeToggle" aria-pressed="false" title="Toggle theme">🌙</button>
+      </nav>
+    </div>
+  </header>
 
-  <h2>Summary</h2>
-  <p>We are committed to protecting your privacy. This policy explains what data the app collects, how we use it, and how backups and cloud integrations (such as Dropbox or Google Drive) are handled.</p>
+  <!-- Privacy Content -->
+  <main>
+    <article class="policy-card glass-card">
+      <h1>Privacy Policy — ABMS</h1>
+      <p class="muted">Last updated: August 26, 2025</p>
 
-  <h2>What data we handle</h2>
-  <ul>
-    <li><strong>Local database files.</strong> The app uses an on-device SQLite/DB file to store user data (expenses, debts, settings). Backups export this database as a single <code>.Abebe Getachew</code> file.</li>
-    <li><strong>Encryption metadata.</strong> We store initialization vectors and key metadata needed to decrypt backups — only on the user's device. We do not transmit encryption keys to our servers by default.</li>
-    <li><strong>Optional cloud tokens.</strong> If you link a cloud provider (Dropbox), we save the provider access token locally on your device or in secure storage; we do not store tokens on our servers.</li>
-  </ul>
+      <h2>Summary</h2>
+      <p>We are committed to protecting your privacy. This policy explains what data the app collects, how we use it, how backups and cloud integrations (such as Dropbox) are handled, and your privacy rights.</p>
 
-  <h2>Backups & cloud integrations (Dropbox)</h2>
-  <p>When exporting a backup to Dropbox:</p>
-  <ol>
-    <li>The app encrypts your database locally using strong AES encryption (AES-256) before any upload.</li>
-    <li>We use the official Dropbox SDK and OAuth flow. You explicitly sign into Dropbox and grant the app permission.</li>
-    <li>The app only uploads the encrypted <code>.Abebe Getachew</code> file. Dropbox will receive the encrypted file and any Dropbox account metadata necessary to store it.</li>
-    <li>We do not retain copies of your backup on our servers. All backups are created, encrypted and uploaded from your device unless you explicitly share them elsewhere.</li>
-  </ol>
+      <h2>Interpretation and Definitions</h2>
+      <h3>Definitions</h3>
+      <ul>
+        <li><strong>Application:</strong> refers to ABMS, the software program provided by the Company.</li>
+        <li><strong>Company:</strong> refers to ABMS, "We", "Us", or "Our".</li>
+        <li><strong>Device:</strong> any device that can access the Service (computer, mobile, tablet).</li>
+        <li><strong>Personal Data:</strong> any information that relates to an identified or identifiable individual.</li>
+        <li><strong>Service:</strong> refers to the Application.</li>
+        <li><strong>Usage Data:</strong> data collected automatically when using the Service.</li>
+        <li><strong>You:</strong> the individual accessing or using the Service.</li>
+      </ul>
 
-  <h2>Scopes & Dropbox permissions</h2>
-  <p>Abebe Getachew requests only the scopes required to perform uploads. For a Scoped Dropbox App we typically request the minimum scopes such as <code>files.content.write</code> to create files in the user's Dropbox (or Saver/Chooser flows if used). You will see the exact permission request during the OAuth consent screen.</p>
+      <h2>Data We Handle</h2>
+      <ul>
+        <li><strong>Local database files:</strong> The app uses an on-device SQLite/DB file to store user data (expenses, debts, settings). Backups export this database as a single <code>.abms</code> file.</li>
+        <li><strong>Encryption metadata:</strong> Initialization vectors and key metadata needed to decrypt backups are stored only on the user's device. Encryption keys are not transmitted to our servers by default.</li>
+        <li><strong>Optional cloud tokens:</strong> If you link a cloud provider (Dropbox), the access token is saved locally on your device or in secure storage; it is not stored on our servers.</li>
+      </ul>
 
-  <h2>Security</h2>
-  <ul>
-    <li>Backups are encrypted on the device before any network transfer.</li>
-    <li>We recommend that you protect your device with a passcode/biometrics.</li>
-    <li>Stored tokens are kept in secure device storage (Android Keystore/EncryptedSharedPreferences) if available.</li>
-  </ul>
+      <h2>Backups & Cloud Integrations (Dropbox)</h2>
+      <ol>
+        <li>Backups are encrypted locally using AES-256 before upload.</li>
+        <li>The official Dropbox SDK and OAuth flow are used; you explicitly grant permission.</li>
+        <li>Only the encrypted <code>.abms</code> file and necessary Dropbox metadata are uploaded.</li>
+        <li>No copies of backups are retained on our servers unless you share them.</li>
+      </ol>
 
-  <h2>Retention</h2>
-  <p>We do not keep copies of backups on our servers. Any backups you create and upload to Dropbox will be stored in your Dropbox account according to Dropbox's retention and deletion policies.</p>
+      <h2>Security</h2>
+      <ul>
+        <li>Backups are encrypted before transfer.</li>
+        <li>Device protection via passcode/biometrics is recommended.</li>
+        <li>Stored tokens are in secure device storage if available.</li>
+      </ul>
 
-  <h2>Third-party services</h2>
-  <p>We rely on third-party services (Dropbox, Google) solely to store files if you choose. Their privacy policies apply to the parts of the experience they handle. Always review third-party privacy policies before granting permissions.</p>
+      <h2>Retention</h2>
+      <p>We do not keep copies of backups on our servers. Backups you create and upload to Dropbox are stored in your Dropbox account per Dropbox's policies. Personal Data is retained only as long as necessary to provide the Service, comply with legal obligations, resolve disputes, and enforce agreements.</p>
 
-  <h2>Your rights</h2>
-  <p>You can:</p>
-  <ul>
-    <li>Revoke Dropbox access anytime from your Dropbox account settings.</li>
-    <li>Delete backups you uploaded from within Dropbox.</li>
-    <li>Delete your local data using the app's "Reset" or "Clear data" feature.</li>
-  </ul>
+      <h2>Third-Party Services</h2>
+      <p>We use third-party services (Dropbox, Google) solely for storing files if you choose. Their privacy policies govern the data they handle. Review them before granting permissions.</p>
 
-  <h2>Contact</h2>
-  <p>If you have questions about this policy or data handling: <a href="mailto:awashsimrgeta123@gmail.com">awashsimrgeta123@gmail.com</a></p>
+      <h2>Use of Personal Data</h2>
+      <ul>
+        <li>Provide and maintain the Service.</li>
+        <li>Manage your account.</li>
+        <li>Perform contracts you enter through the Service.</li>
+        <li>Contact you regarding services, updates, or promotions.</li>
+        <li>Analyze trends and improve the Service.</li>
+      </ul>
 
-  <h2>Changes to this policy</h2>
-  <p>We may update this document to reflect changes in the app or legal requirements. We'll post the date of last update at the top of this page.</p>
+      <h2>Sharing of Personal Data</h2>
+      <ul>
+        <li>With Service Providers for analytics or communication.</li>
+        <li>During business transfers, mergers, or acquisitions.</li>
+        <li>With affiliates and business partners where necessary.</li>
+        <li>With your consent or in public areas if you share content.</li>
+      </ul>
+
+      <h2>Transfer of Personal Data</h2>
+      <p>Your information may be processed outside your country. By using the Service, you consent to such transfers, provided appropriate security measures are in place.</p>
+
+      <h2>Delete Your Personal Data</h2>
+      <p>You can delete personal data via account settings or by contacting us. Some data may be retained if legally required.</p>
+
+      <h2>Children's Privacy</h2>
+      <p>The Service is not directed to anyone under 13. We do not knowingly collect data from children under 13.</p>
+
+      <h2>Links to Other Websites</h2>
+      <p>The Service may contain links to third-party websites. We are not responsible for their content or privacy practices.</p>
+
+      <h2>Your Rights</h2>
+      <ul>
+        <li>Revoke cloud access anytime.</li>
+        <li>Delete backups in cloud storage.</li>
+        <li>Reset or clear local app data.</li>
+      </ul>
+
+      <h2>Changes to This Policy</h2>
+      <p>We may update this Privacy Policy to reflect app or legal changes. Updates will show the latest "Last updated" date.</p>
+
+      <h2>Contact</h2>
+      <p>If you have questions, email us at <a href="mailto:awashsimrgeta123@gmail.com">awashsimrgeta123@gmail.com</a> or call +251911863424.</p>
+    </article>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container footer-inner">
+      <div><strong>ABMS</strong> — Backup Management System © 2025</div>
+      <div class="footer-links">
+        <a href="/privacy" aria-current="page">Privacy</a>
+        <a href="mailto:awashsimrgeta123@gmail.com">Support</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js" defer></script>
 </body>
 </html>
