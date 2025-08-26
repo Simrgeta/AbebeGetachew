@@ -1,48 +1,119 @@
-// ----------------- Light/Dark Mode -----------------
-document.querySelectorAll('#themeToggle').forEach(btn=>{
-    btn.addEventListener('click',()=>{document.body.classList.toggle('light');});
+// theme toggle (persists)
+const themeToggle = document.getElementById('themeToggle');
+const current = localStorage.getItem('abms_theme') || (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+if (current === 'light') document.body.classList.add('light');
+themeToggle.textContent = document.body.classList.contains('light') ? '☀️' : '🌙';
+themeToggle.setAttribute('aria-pressed', document.body.classList.contains('light'));
+themeToggle.addEventListener('click', () => {
+  document.body.classList.toggle('light');
+  const isLight = document.body.classList.contains('light');
+  localStorage.setItem('abms_theme', isLight ? 'light' : 'dark');
+  themeToggle.textContent = isLight ? '☀️' : '🌙';
+  themeToggle.setAttribute('aria-pressed', isLight);
 });
 
-// ----------------- 3D Interactive Particles -----------------
-const canvas=document.getElementById('particles');
-const ctx=canvas.getContext('2d');
-let w=canvas.width=window.innerWidth;
-let h=canvas.height=window.innerHeight;
-window.addEventListener('resize',()=>{w=canvas.width=window.innerWidth;h=canvas.height=window.innerHeight;});
+/* ---------- Particles (lightweight, throttled) ---------- */
+const canvas = document.getElementById('particles');
+const ctx = canvas.getContext('2d');
 
-const particlesArray=[];
-const colors=['#ff6ec7','#1ee7ff','#fffa3c','#f5f5f5'];
+let DPR = Math.max(1, window.devicePixelRatio || 1);
+let w = canvas.width = innerWidth * DPR;
+let h = canvas.height = innerHeight * DPR;
+canvas.style.width = innerWidth + 'px';
+canvas.style.height = innerHeight + 'px';
+ctx.scale(DPR, DPR);
 
-class Particle{
-    constructor(){this.x=Math.random()*w;this.y=Math.random()*h;this.radius=Math.random()*3+1;this.color=colors[Math.floor(Math.random()*colors.length)];this.vx=(Math.random()-0.5)*0.7;this.vy=(Math.random()-0.5)*0.7;}
-    draw(){ctx.beginPath();ctx.arc(this.x,this.y,this.radius,0,Math.PI*2);ctx.fillStyle=this.color;ctx.fill();}
-    update(){this.x+=this.vx;this.y+=this.vy;if(this.x<0||this.x>w)this.vx*=-1;if(this.y<0||this.y>h)this.vy*=-1;}
-}
-
-for(let i=0;i<300;i++)particlesArray.push(new Particle());
-canvas.addEventListener('mousemove',e=>{
-    particlesArray.forEach(p=>{
-        let dx=e.x-p.x;let dy=e.y-p.y;let dist=Math.sqrt(dx*dx+dy*dy);
-        if(dist<100){p.vx+=dx*0.0005;p.vy+=dy*0.0005;}
-    });
+window.addEventListener('resize', () => {
+  DPR = Math.max(1, window.devicePixelRatio || 1);
+  w = canvas.width = innerWidth * DPR;
+  h = canvas.height = innerHeight * DPR;
+  canvas.style.width = innerWidth + 'px';
+  canvas.style.height = innerHeight + 'px';
+  ctx.scale(DPR, DPR);
 });
 
-function animate(){
-    ctx.clearRect(0,0,w,h);
-    particlesArray.forEach(p=>{p.update();p.draw();});
-    requestAnimationFrame(animate);
+const colors = ['#ff6ec7', '#1ee7ff', '#fffa3c', '#8a8fff'];
+const particles = [];
+const PARTICLE_COUNT = Math.min(220, Math.floor((innerWidth * innerHeight) / 9000));
+
+class P {
+  constructor(){
+    this.x = Math.random() * innerWidth;
+    this.y = Math.random() * innerHeight;
+    this.r = Math.random() * 2 + 0.6;
+    this.c = colors[Math.floor(Math.random()*colors.length)];
+    this.vx = (Math.random()-0.5) * 0.4;
+    this.vy = (Math.random()-0.5) * 0.4;
+  }
+  update(){ 
+    this.x += this.vx; this.y += this.vy;
+    if(this.x < -10) this.x = innerWidth + 10;
+    if(this.x > innerWidth + 10) this.x = -10;
+    if(this.y < -10) this.y = innerHeight + 10;
+    if(this.y > innerHeight + 10) this.y = -10;
+  }
+  draw(){
+    ctx.beginPath();
+    ctx.globalAlpha = 0.9;
+    ctx.fillStyle = this.c;
+    ctx.arc(this.x, this.y, this.r, 0, Math.PI*2);
+    ctx.fill();
+  }
 }
-animate();
 
-// ----------------- Parallax Scroll -----------------
-const parallaxItems=document.querySelectorAll('[data-parallax]');
-window.addEventListener('scroll',()=>{parallaxItems.forEach(item=>{const offset=window.scrollY*0.2;item.style.transform=`translateY(${offset}px)`;});});
+for(let i=0;i<PARTICLE_COUNT;i++) particles.push(new P());
 
-// ----------------- Animate Features On Scroll -----------------
-const featureCards=document.querySelectorAll('.feature-cards .glass-card');
-const observer=new IntersectionObserver(entries=>{
-    entries.forEach(entry=>{
-        if(entry.isIntersecting) entry.target.classList.add('visible');
-    });
-},{threshold:0.5});
-featureCards.forEach(card=>observer.observe(card));
+let mouse = {x:-9999,y:-9999};
+let lastMove = 0;
+window.addEventListener('mousemove', (e) => {
+  mouse.x = e.clientX; mouse.y = e.clientY;
+  lastMove = Date.now();
+});
+window.addEventListener('mouseout', () => { mouse.x = -9999; mouse.y = -9999; });
+
+function draw(){
+  ctx.clearRect(0,0,innerWidth,innerHeight);
+  particles.forEach(p=>{
+    // subtle attraction to mouse when moving
+    if(Date.now() - lastMove < 1200){
+      const dx = mouse.x - p.x, dy = mouse.y - p.y;
+      const dist = Math.sqrt(dx*dx + dy*dy);
+      if(dist < 120){
+        p.vx += (dx/dist) * 0.02;
+        p.vy += (dy/dist) * 0.02;
+      }
+    }
+    p.vx *= 0.995; p.vy *= 0.995;
+    p.update(); p.draw();
+  });
+  requestAnimationFrame(draw);
+}
+draw();
+
+/* ---------- Parallax simple: translate slower on scroll ---------- */
+const parallax = document.querySelectorAll('[data-parallax]');
+window.addEventListener('scroll', () => {
+  const y = window.scrollY;
+  parallax.forEach((el, i) => {
+    el.style.transform = `translateY(${y * (0.03 + (i * 0.003))}px)`;
+  });
+});
+
+/* ---------- Intersection observer for entrance animation ---------- */
+const animated = document.querySelectorAll('[data-anim]');
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      entry.target.classList.add('is-visible');
+      io.unobserve(entry.target);
+    }
+  });
+},{threshold:0.18});
+animated.forEach(n => io.observe(n));
+
+/* small accessibility improvement: keyboard focus outline */
+document.addEventListener('keydown', (e) => {
+  if(e.key === 'Tab') document.documentElement.classList.add('user-is-tabbing');
+});
+
+/* end of file */
