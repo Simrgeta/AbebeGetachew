@@ -1,46 +1,68 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Policy - ABMS</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Privacy Policy — ABMS</title>
+  <style>
+    body{font-family:Inter,Segoe UI,Arial;line-height:1.6;color:#0b1220;padding:30px;max-width:900px;margin:0 auto}
+    h1,h2{color:#112; margin-bottom:10px}
+    p{color:#223}
+    a{color:#1a73e8}
+    .muted{color:#556}
+  </style>
 </head>
 <body>
-    <header>
-        <div class="logo">ABMS</div>
-        <nav>
-            <a href="index.html">Home</a>
-            <button id="themeToggle">🌙</button>
-        </nav>
-    </header>
+  <h1>Privacy Policy — ABMS</h1>
+  <p class="muted">Last updated: 2025-08-26</p>
 
-    <section class="privacy glass-card">
-        <h1>Privacy Policy</h1>
-        <p>Effective date: August 26, 2025</p>
+  <h2>Summary</h2>
+  <p>ABMS ("we", "our", "the app") is committed to protecting your privacy. This policy explains what data the app collects, how we use it, and how backups and cloud integrations (such as Dropbox or Google Drive) are handled.</p>
 
-        <h2>1. Information Collection</h2>
-        <p>ABMS collects no personal data by default. Your database backups are encrypted locally before any cloud upload.</p>
+  <h2>What data we handle</h2>
+  <ul>
+    <li><strong>Local database files.</strong> The app uses an on-device SQLite/DB file to store user data (expenses, debts, settings). Backups export this database as a single <code>.abms</code> file.</li>
+    <li><strong>Encryption metadata.</strong> We store initialization vectors and key metadata needed to decrypt backups — only on the user's device. We do not transmit encryption keys to our servers by default.</li>
+    <li><strong>Optional cloud tokens.</strong> If you link a cloud provider (Dropbox), we save the provider access token locally on your device or in secure storage; we do not store tokens on our servers.</li>
+  </ul>
 
-        <h2>2. Dropbox Integration</h2>
-        <p>If you choose to upload backups to Dropbox, ABMS only accesses the files you explicitly select. We do not collect, store, or share your Dropbox credentials. OAuth 2 authentication ensures secure access tokens are stored on your device.</p>
+  <h2>Backups & cloud integrations (Dropbox)</h2>
+  <p>When exporting a backup to Dropbox:</p>
+  <ol>
+    <li>The app encrypts your database locally using strong AES encryption (AES-256) before any upload.</li>
+    <li>We use the official Dropbox SDK and OAuth flow. You explicitly sign into Dropbox and grant the app permission.</li>
+    <li>The app only uploads the encrypted <code>.abms</code> file. Dropbox will receive the encrypted file and any Dropbox account metadata necessary to store it.</li>
+    <li>We do not retain copies of your backup on our servers. All backups are created, encrypted and uploaded from your device unless you explicitly share them elsewhere.</li>
+  </ol>
 
-        <h2>3. Data Security</h2>
-        <p>All database files are encrypted using AES encryption before leaving your device. ABMS never transmits unencrypted data.</p>
+  <h2>Scopes & Dropbox permissions</h2>
+  <p>ABMS requests only the scopes required to perform uploads. For a Scoped Dropbox App we typically request the minimum scopes such as <code>files.content.write</code> to create files in the user's Dropbox (or Saver/Chooser flows if used). You will see the exact permission request during the OAuth consent screen.</p>
 
-        <h2>4. Third-Party Services</h2>
-        <p>Dropbox is the only third-party service integrated. ABMS adheres to Dropbox API security guidelines.</p>
+  <h2>Security</h2>
+  <ul>
+    <li>Backups are encrypted on the device before any network transfer.</li>
+    <li>We recommend that you protect your device with a passcode/biometrics.</li>
+    <li>Stored tokens are kept in secure device storage (Android Keystore/EncryptedSharedPreferences) if available.</li>
+  </ul>
 
-        <h2>5. Changes to this Policy</h2>
-        <p>We may update this privacy policy occasionally. Changes will be posted here with the effective date updated.</p>
+  <h2>Retention</h2>
+  <p>We do not keep copies of backups on our servers. Any backups you create and upload to Dropbox will be stored in your Dropbox account according to Dropbox's retention and deletion policies.</p>
 
-        <p>By using ABMS, you agree to this Privacy Policy.</p>
-    </section>
+  <h2>Third-party services</h2>
+  <p>We rely on third-party services (Dropbox, Google) solely to store files if you choose. Their privacy policies apply to the parts of the experience they handle. Always review third-party privacy policies before granting permissions.</p>
 
-    <footer>
-        <p>&copy; 2025 Simrgeta Awash Mulat. All rights reserved.</p>
-    </footer>
+  <h2>Your rights</h2>
+  <p>You can:</p>
+  <ul>
+    <li>Revoke Dropbox access anytime from your Dropbox account settings.</li>
+    <li>Delete backups you uploaded from within Dropbox.</li>
+    <li>Delete your local data using the app's "Reset" or "Clear data" feature.</li>
+  </ul>
 
-    <script src="script.js"></script>
+  <h2>Contact</h2>
+  <p>If you have questions about this policy or data handling: <a href="mailto:support@abms.example">support@abms.example</a></p>
+
+  <h2>Changes to this policy</h2>
+  <p>We may update this document to reflect changes in the app or legal requirements. We'll post the date of last update at the top of this page.</p>
 </body>
 </html>
