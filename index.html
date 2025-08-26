@@ -1,13 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ABMS App</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abebe Getachew App</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body style="font-family:sans-serif; text-align:center; padding:50px;">
-  <h1>ABMS App</h1>
-  <p>Backup Management System app by Simrgeta Awash Mulat</p>
-  <p><a href="privacy.html">Privacy Policy</a></p>
+<body>
+    <!-- Particle Background -->
+    <canvas id="particles"></canvas>
+
+    <!-- Header -->
+    <header>
+        <div class="logo">ABMS</div>
+        <nav>
+            <a href="#features">Features</a>
+            <a href="privacy.html" target="_blank">Privacy Policy</a>
+            <button id="themeToggle">🌙</button>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content glass-card">
+            <h1>Welcome to ABMS</h1>
+            <p>The most modern salary & expense management system ever created!</p>
+            <a href="#features" class="btn-glow">Discover Features</a>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <h2>Features</h2>
+        <div class="feature-cards">
+            <div class="glass-card">
+                <h3>Secure Backup</h3>
+                <p>Encrypt & backup your data locally or to Dropbox/Google Drive safely.</p>
+            </div>
+            <div class="glass-card">
+                <h3>Modern UI</h3>
+                <p>Beautiful glassmorphic interface with animations & responsive design.</p>
+            </div>
+            <div class="glass-card">
+                <h3>Light & Dark Mode</h3>
+                <p>Toggle seamlessly between light and dark themes to match your style.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Simrgeta Awash Mulat. All rights reserved.</p>
+        <a href="privacy.html" target="_blank">Privacy Policy</a>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
